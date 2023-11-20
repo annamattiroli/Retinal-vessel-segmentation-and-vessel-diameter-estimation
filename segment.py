@@ -84,6 +84,7 @@ def seg(img, t=8, A=200,L=50):
     # Skeletonizing again to remove unwanted noise
     thinned1 = cv2.ximgproc.thinning(e_im)
     thinned1 = thinned1*(mask/255)
+    plt.imshow(thinned1, cmap='gray')
 
     # Removing bifurcation points by using specially designed kernels
     # Can be optimized further! (not the best implementation)
@@ -114,9 +115,9 @@ def seg(img, t=8, A=200,L=50):
                         cv2.circle(hi, (j, i), 2, (0, 255, 0), 2)
                         cv2.circle(thi, (j, i), 2, (0, 0, 0), 2)
 
-    #plt.figure(figsize=(20, 14))
+    plt.figure(figsize=(20, 14))
     thi = cv2.cvtColor(thi, cv2.COLOR_BGR2GRAY)
-    #plt.imshow(hi, cmap='gray')  # This image shows all the bifurcation points
+    plt.imshow(hi, cmap='gray')  # This image shows all the bifurcation points
 
     # Removing centerlines which are smaller than L=50 px in length
     cl = thi.copy()
