@@ -4,14 +4,13 @@ import matplotlib.pyplot as plt
 import math
 
  
-def segmentation(img, t=8, A=200, L=50, resize=True):  
+def segmentation(img, t=8, A=200, resize=True, new_w=1000, new_h=1000):  
     """
     Employes a global thresholding based segmentation algorithm for retinal vessel segmentation
 
     Args:
         t: Threshold => the threshold used to segment the image (value of 8-10 works best. Otsu and Isodata values do not led to best result)
         A: Threshold area => All the segments less than A in area are to be removed and considered as noise
-        L: Threshold length => All the centrelines less than L in length are to be removed
         resize: boolean => weather you want to resize the image to (1000px, 1000px)
     Returns:
         Segmented image
@@ -19,7 +18,7 @@ def segmentation(img, t=8, A=200, L=50, resize=True):
 
     # Resize image to ~(1000px, 1000px) for best results
     if resize:
-        img = cv2.resize(img, (1000, 1000))
+        img = cv2.resize(img, (new_w, new_h))
 
     # Green Channel
     g = img[:,:,1]
